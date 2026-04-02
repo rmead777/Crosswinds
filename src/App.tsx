@@ -1,23 +1,22 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Shield, 
-  Zap, 
-  Brain, 
-  BarChart3, 
-  Users, 
-  ArrowRight, 
-  Menu, 
-  X, 
-  Linkedin, 
-  Mail, 
+import {
+  Shield,
+  Zap,
+  Brain,
+  BarChart3,
+  Users,
+  ArrowRight,
+  Menu,
+  X,
+  Linkedin,
+  Mail,
   CheckCircle2,
   ChevronRight,
   Target,
   Activity
 } from 'lucide-react';
-
-console.log("Crosswinds Advisory App Initializing...");
+import { initCanvasAnimations } from './lib/animations';
 
 const NAV_LINKS = [
   { name: 'Capabilities', href: '#capabilities' },
@@ -30,22 +29,21 @@ const COMPANIES = [
 ];
 
 const HeroParticles = () => {
-  // Generate random particles
-  const particles = Array.from({ length: 25 }).map((_, i) => ({
+  const particles = Array.from({ length: 40 }).map((_, i) => ({
     id: i,
-    size: Math.random() * 4 + 2, // 2px to 6px
-    x: Math.random() * 100, // 0% to 100%
-    y: Math.random() * 100, // 0% to 100%
-    duration: Math.random() * 15 + 15, // 15s to 30s
+    size: Math.random() * 6 + 3,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    duration: Math.random() * 12 + 10,
     delay: Math.random() * 5,
   }));
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute rounded-full bg-brand-gold/30"
+          className="absolute rounded-full bg-brand-gold/50"
           style={{
             width: p.size,
             height: p.size,
@@ -53,9 +51,9 @@ const HeroParticles = () => {
             top: `${p.y}%`,
           }}
           animate={{
-            y: [`${p.y}%`, `${p.y - 15}%`, `${p.y}%`],
-            x: [`${p.x}%`, `${p.x + 10}%`, `${p.x}%`],
-            opacity: [0, 0.6, 0],
+            y: [`${p.y}%`, `${p.y - 20}%`, `${p.y}%`],
+            x: [`${p.x}%`, `${p.x + 12}%`, `${p.x}%`],
+            opacity: [0, 0.8, 0],
           }}
           transition={{
             duration: p.duration,
@@ -112,22 +110,43 @@ const METHODOLOGY = [
 
 const INSIGHTS = [
   {
-    title: 'The AI Risk Paradox',
-    category: 'AI Governance',
-    description: 'How to enable innovation while maintaining strict model governance.',
-    readTime: '4 min'
+    title: "Using AI Prompt Writing Skills to Enhance Enterprise Risk Management",
+    category: "AI & ERM",
+    description: "How AI-inspired prompt writing techniques can craft concise, contextually relevant risk assessment questions.",
+    readTime: "4 min",
+    image: "/images/ai-prompt.jpg",
+    body: [
+      "As an experienced Enterprise Risk Management (ERM) professional, I have been exploring advanced techniques to harness Artificial Intelligence (AI) for better risk assessments and scenario development. AI\u2019s potential to transform ERM is undeniable, and for many organizations, integrating responsible AI into business processes, including ERM, has become a strategic imperative. Yet, for teams with limited resources or AI expertise, adoption can seem daunting. I propose a practical starting point: using AI-inspired prompt writing to craft concise, contextually relevant risk assessment questions. This approach offers an accessible entry into AI-augmented ERM.",
+      "High-quality risk assessments rely on precise insights from senior leadership and subject matter experts. Well-crafted prompts can drive more accurate and actionable responses. For instance, instead of asking, \u201CWhat risks do you foresee for your business or function?\u201D a prompt like, \u201CWhat operational disruptions could impact our supply chain in the Asia-Pacific region over the next 12 months, considering recent geopolitical tensions or natural disasters?\u201D elicits focused, region-specific input. Similar to how large language models are queried, this method improves data collection and generates more relevant risk scenarios.",
+      "I encourage ERM leaders and practitioners to consider the use of prompt writing techniques to strengthen risk assessments and build AI literacy within their teams and the broader organization. This approach has the potential to deliver immediate value to the ERM process while aligning with the strategic need to integrate responsible AI into business processes."
+    ]
   },
   {
-    title: 'Resilience vs. Redundancy',
-    category: 'Operational Resilience',
-    description: 'Why more infrastructure doesn’t always mean more stability.',
-    readTime: '6 min'
+    title: "Insights from the RIMS ERM Conference",
+    category: "Industry Events",
+    description: "Reflections from the RIMS ERM Conference in Seattle and the growing interest in AI-native risk platforms.",
+    readTime: "3 min",
+    image: "/images/rims-conference.jpg",
+    body: [
+      "I had the opportunity to spend Monday and Tuesday at the RIMS ERM Conference in Seattle, my first time back in several years and my first time attending in an advisory capacity with 7E, the AI native, generative compliance and risk management platform.",
+      "RIMS delivered a strong program this year, with sessions spanning the full range of ERM topics, including practical applications of generative AI in ERM programs and processes. The international turnout from Europe, Canada, Nigeria, Peru, and beyond added meaningful global context to the discussions. I also had the chance to connect with ERM leaders at different stages of their respective careers across mining, financial services, healthcare, education, aerospace, and other sectors, which made for interesting discussions and some great new contacts!",
+      "The 7E booth was busy from conference open to the final minutes before close. The level of interest in 7ECap, 7E\u2019s new ERM module, was inspiring. We had a constant flow of attendees stopping by for an overview and quick demo, and many of them are already scheduling follow-up conversations.",
+      "A great event overall, and I\u2019m looking forward to staying connected with the many practitioners, leaders, and students I met, and the broader RIMS community. Already looking forward to RISKWORLD 2026 in Philadelphia!"
+    ]
   },
   {
-    title: 'The Cost of Compliance Drag',
-    category: 'ERM',
-    description: 'Measuring the impact of bloated risk frameworks on organizational speed.',
-    readTime: '5 min'
+    title: "The CRO, Risk Appetite & Board Engagement",
+    category: "ERM Leadership",
+    description: "Why a well-defined risk appetite aligned with strategy is foundational to effective ERM.",
+    readTime: "5 min",
+    image: "/images/cro-appetite.jpg",
+    body: [
+      "Looking forward to Session #4 this week in the RIMS CRO Certificate in Advanced Enterprise Risk Management program with James Lam and my peers. We will be exploring two critical topics: the role of the Chief Risk Officer (CRO) and the Risk Appetite Statement.",
+      "In my 24 years of risk management leadership across finance, insurance, manufacturing, and telecommunications, I have seen both the impact of a well-developed risk appetite and the shortcomings of one that misses the mark. When embedded within a mature ERM framework, and supported by robust risk identification and reporting, a clear appetite serves as a foundational element of an effective program. It can accelerate maturity, improve adoption of risk management practices across the enterprise, and ensure alignment with strategy and mission-critical objectives.",
+      "By contrast, risk appetites that rely exclusively on familiar performance and compliance metrics \u2014 those standard measures that often dominate board decks and leadership reports \u2014 often fail to align with strategy or reflect the organization\u2019s true capacity to manage risk and opportunity.",
+      "This is why the role of the CRO is so critical. Whether leading the risk function or providing independent oversight, the CRO must work with Board members and executives to shape a risk appetite that is both meaningful and actionable. Done well, it aligns stakeholder expectations for performance with the organization\u2019s actual capacity to manage uncertainty (e.g., through resources, culture, and controls). In this way, the risk appetite serves as a benchmark for evaluating how effectively the company manages risk and as a foundation for long-term performance and resilience.",
+      "A strong CRO and a well-defined risk appetite are critical to effective ERM, but there is no single formula for success. I am eager to hear how my peers approach these challenges and what lessons they have learned in building resilient programs."
+    ]
   }
 ];
 
@@ -234,6 +253,66 @@ function RiskMaturityAssessment() {
   );
 }
 
+function InsightCard({ insight, index }: { insight: typeof INSIGHTS[number]; index: number }) {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="group"
+    >
+      <div
+        className="cursor-pointer"
+        onClick={() => setExpanded(!expanded)}
+      >
+        <div className="aspect-square bg-brand-charcoal/5 rounded-2xl mb-6 overflow-hidden relative max-w-[500px]">
+          {insight.image && (
+            <img src={insight.image} alt={insight.title} className="w-full h-full object-cover" />
+          )}
+          <div className="absolute inset-0 bg-brand-gold/0 group-hover:bg-brand-gold/10 transition-colors" />
+          <div className="absolute bottom-4 left-4">
+            <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-widest text-brand-charcoal">
+              {insight.category}
+            </span>
+          </div>
+        </div>
+        <h3 className="text-2xl font-serif text-brand-charcoal mb-3 group-hover:text-brand-gold transition-colors">
+          {insight.title}
+        </h3>
+        <p className="text-brand-charcoal/60 text-sm mb-4 leading-relaxed">{insight.description}</p>
+        <span className="text-brand-gold text-sm font-semibold flex items-center gap-1">
+          {expanded ? "Close" : "Read Article"}
+          <ChevronRight size={16} className={`transition-transform ${expanded ? "rotate-90" : ""}`} />
+        </span>
+      </div>
+
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pt-6 pb-2 border-t border-brand-charcoal/10 mt-4 space-y-4">
+              {insight.body.map((paragraph, i) => (
+                <p key={i} className="text-sm text-brand-charcoal/70 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+              <p className="text-xs text-brand-charcoal/40 pt-2">{insight.readTime} read</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+}
+
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -242,6 +321,11 @@ export default function App() {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const cleanup = initCanvasAnimations();
+    return cleanup;
   }, []);
 
   return (
@@ -253,12 +337,12 @@ export default function App() {
     >
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-nav py-3' : 'bg-transparent py-6'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <a href="#" className="flex items-center gap-2 group">
+        <div className="mx-auto px-10 flex justify-between items-center w-full">
+          <a href="#" className="flex items-center gap-2 group shrink-0">
             <div className="w-8 h-8 bg-brand-charcoal flex items-center justify-center rounded-sm transition-transform group-hover:rotate-12">
               <span className="text-brand-cream font-serif font-bold text-lg">C</span>
             </div>
-            <span className="font-serif text-xl font-semibold tracking-tight text-brand-charcoal">
+            <span className="font-serif text-xl font-semibold tracking-tight text-brand-charcoal whitespace-nowrap">
               Crosswinds <span className="text-brand-gold">Advisory</span>
             </span>
           </a>
@@ -327,54 +411,55 @@ export default function App() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative pt-40 pb-24 md:pt-56 md:pb-40 overflow-hidden">
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <canvas id="flowCanvas" className="absolute inset-0 w-full h-full pointer-events-none" />
         <HeroParticles />
 
         <div className="absolute top-0 right-0 -z-10 opacity-10">
           <div className="w-[800px] h-[800px] bg-brand-gold rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2" />
         </div>
-        
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
+
+        <div className="max-w-7xl mx-auto px-10 w-full py-32">
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-3xl"
+            className="max-w-4xl mx-auto text-center"
           >
-            <motion.span 
+            <motion.span
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 text-brand-gold text-xs font-bold tracking-widest uppercase mb-6"
+              className="inline-block px-5 py-2 rounded-full bg-brand-gold/10 text-brand-gold text-sm font-bold tracking-widest uppercase mb-8"
             >
               Principal-Led Advisory
             </motion.span>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1 }}
-              className="text-5xl md:text-7xl font-serif text-brand-charcoal leading-[1.1] mb-8 text-balance"
+              className="text-6xl md:text-7xl lg:text-8xl font-serif text-brand-charcoal leading-[1.1] mb-10"
             >
-              Decision Clarity Under <span className="italic text-brand-gold">Uncertainty.</span>
+              Decision Clarity<br /><span className="whitespace-nowrap">Under <span className="italic text-brand-gold">Uncertainty.</span></span>
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 1 }}
-              className="text-xl text-brand-charcoal/70 leading-relaxed mb-10 max-w-2xl"
+              className="text-xl md:text-2xl text-brand-charcoal/70 leading-relaxed mb-12 max-w-2xl mx-auto"
             >
               Practical enterprise risk management, operational resilience, and AI-enabled GRC solutions designed to strengthen organizations and enable strategic confidence.
             </motion.p>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.1, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <a href="#contact" className="bg-brand-charcoal text-brand-cream px-8 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-brand-gold transition-all group">
-                Connect with a Principal <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+              <a href="#contact" className="bg-brand-charcoal text-brand-cream px-10 py-5 rounded-full text-lg font-bold flex items-center justify-center gap-2 hover:bg-brand-gold transition-all group">
+                Connect with a Principal <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
               </a>
-              <a href="#capabilities" className="border border-brand-charcoal/20 text-brand-charcoal px-8 py-4 rounded-full font-bold flex items-center justify-center hover:bg-brand-charcoal/5 transition-all">
+              <a href="#capabilities" className="border border-brand-charcoal/20 text-brand-charcoal px-10 py-5 rounded-full text-lg font-bold flex items-center justify-center hover:bg-brand-charcoal/5 transition-all">
                 Explore Capabilities
               </a>
             </motion.div>
@@ -468,6 +553,7 @@ export default function App() {
 
       {/* Approach Section */}
       <section id="approach" className="py-24 md:py-40 bg-brand-charcoal text-brand-cream overflow-hidden relative">
+        <canvas id="insightCanvas" className="absolute inset-0 w-full h-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-brand-gold/10 to-transparent pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -666,7 +752,7 @@ export default function App() {
       {/* Insights Section */}
       <section className="py-24 md:py-40 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -677,33 +763,14 @@ export default function App() {
               <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal mb-6">Executive Insights</h2>
               <p className="text-lg text-brand-charcoal/70">Thought leadership on the intersection of risk, resilience, and AI.</p>
             </div>
-            <a href="#" className="text-brand-gold font-bold flex items-center gap-2 hover:gap-3 transition-all">
-              View All Articles <ArrowRight size={18} />
+            <a href="https://www.linkedin.com/in/billsavage/" target="_blank" rel="noopener noreferrer" className="text-brand-gold font-bold flex items-center gap-2 hover:gap-3 transition-all shrink-0">
+              View All on LinkedIn <ArrowRight size={18} />
             </a>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {INSIGHTS.map((insight, i) => (
-              <motion.div 
-                key={insight.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="group cursor-pointer"
-              >
-                <div className="aspect-video bg-brand-charcoal/5 rounded-2xl mb-6 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-brand-gold/0 group-hover:bg-brand-gold/10 transition-colors" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-[10px] font-bold uppercase tracking-widest text-brand-charcoal">
-                      {insight.category}
-                    </span>
-                  </div>
-                </div>
-                <h3 className="text-2xl font-serif text-brand-charcoal mb-3 group-hover:text-brand-gold transition-colors">{insight.title}</h3>
-                <p className="text-brand-charcoal/60 text-sm mb-4 leading-relaxed">{insight.description}</p>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand-charcoal/50">{insight.readTime} Read</span>
-              </motion.div>
+              <InsightCard key={insight.title} insight={insight} index={i} />
             ))}
           </div>
         </div>
@@ -790,7 +857,7 @@ export default function App() {
               <div className="p-12 md:p-20 bg-brand-charcoal text-brand-cream">
                 <h2 className="text-4xl md:text-5xl font-serif mb-8">Ready to strengthen your risk posture?</h2>
                 <p className="text-brand-cream/60 text-lg mb-12">
-                  Let’s connect to discuss how we can streamline your risk identification, assessment, and reporting.
+                  Let"s connect to discuss how we can streamline your risk identification, assessment, and reporting.
                 </p>
                 
                 <div className="space-y-8">
