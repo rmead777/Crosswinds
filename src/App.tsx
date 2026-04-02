@@ -941,7 +941,7 @@ export default function App() {
           </p>
 
           <div className="flex gap-6">
-            <a href="#" className="text-brand-charcoal/40 hover:text-brand-gold transition-colors"><Linkedin size={20} /></a>
+            <a href="https://www.linkedin.com/company/crosswinds-advisory-llc/" target="_blank" rel="noopener noreferrer" className="text-brand-charcoal/40 hover:text-brand-gold transition-colors"><Linkedin size={20} /></a>
             <a href="#" className="text-brand-charcoal/40 hover:text-brand-gold transition-colors"><Mail size={20} /></a>
           </div>
         </motion.div>
