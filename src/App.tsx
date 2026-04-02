@@ -854,41 +854,41 @@ export default function App() {
             className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-brand-charcoal/5"
           >
             <div className="grid lg:grid-cols-2">
-              <div className="p-12 md:p-20 bg-brand-charcoal text-brand-cream">
-                <h2 className="text-4xl md:text-5xl font-serif mb-8">Ready to strengthen your risk posture?</h2>
+              <div className="p-8 sm:p-12 lg:p-20 bg-brand-charcoal text-brand-cream">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif mb-8">Ready to strengthen your risk posture?</h2>
                 <p className="text-brand-cream/60 text-lg mb-12">
-                  Let"s connect to discuss how we can streamline your risk identification, assessment, and reporting.
+                  Let&apos;s connect to discuss how we can streamline your risk identification, assessment, and reporting.
                 </p>
-                
+
                 <div className="space-y-8">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 shrink-0 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
                       <Mail size={20} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-xs font-bold uppercase tracking-widest text-brand-cream/60 mb-1">Email Us</p>
-                      <a href="mailto:bill@crosswindsadvisory.com" className="text-xl hover:text-brand-gold transition-colors">bill@crosswindsadvisory.com</a>
+                      <a href="mailto:bill@crosswindsadvisory.com" className="text-base sm:text-lg hover:text-brand-gold transition-colors break-all">bill@crosswindsadvisory.com</a>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
+                    <div className="w-12 h-12 shrink-0 rounded-full bg-brand-gold/20 flex items-center justify-center text-brand-gold">
                       <Linkedin size={20} />
                     </div>
                     <div>
                       <p className="text-xs font-bold uppercase tracking-widest text-brand-cream/60 mb-1">LinkedIn</p>
-                      <a href="#" className="text-xl hover:text-brand-gold transition-colors">Bill Savage</a>
+                      <a href="#" className="text-base sm:text-lg hover:text-brand-gold transition-colors">Bill Savage</a>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-20 pt-12 border-t border-white/10">
+                <div className="mt-10 md:mt-20 pt-12 border-t border-white/10">
                   <p className="text-brand-gold font-serif italic text-xl">
                     Practical. Sustainable. Strategic impact.
                   </p>
                 </div>
               </div>
 
-              <div className="p-12 md:p-20">
+              <div className="p-8 sm:p-12 lg:p-20">
                 <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
