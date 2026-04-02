@@ -329,24 +329,6 @@ export default function App() {
       {/* Hero Section */}
       <section className="relative pt-40 pb-24 md:pt-56 md:pb-40 overflow-hidden">
         <HeroParticles />
-        {/* Wind Lines Animation */}
-        <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
-          {[...Array(5)].map((_, i) => (
-            <motion.div 
-              key={i}
-              initial={{ x: '-100%', opacity: 0 }}
-              animate={{ x: '100%', opacity: [0, 0.4, 0] }}
-              transition={{ 
-                duration: 10 + i * 2, 
-                repeat: Infinity, 
-                ease: "linear",
-                delay: i * 2
-              }}
-              className="absolute h-px bg-gradient-to-r from-transparent via-brand-gold/40 to-transparent w-full"
-              style={{ top: `${20 + i * 15}%` }}
-            />
-          ))}
-        </div>
 
         <div className="absolute top-0 right-0 -z-10 opacity-10">
           <div className="w-[800px] h-[800px] bg-brand-gold rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2" />
@@ -402,16 +384,31 @@ export default function App() {
 
       {/* Trust Bar */}
       <section className="py-12 border-y border-brand-charcoal/5 bg-white/50">
-        <div className="max-w-7xl mx-auto px-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6"
+        >
           <p className="text-center text-xs font-bold tracking-[0.2em] uppercase text-brand-charcoal/40 mb-8">
             Experience at Global Leaders
           </p>
           <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-60 grayscale">
-            {COMPANIES.map(co => (
-              <span key={co} className="font-serif text-xl md:text-2xl text-brand-charcoal font-medium italic">{co}</span>
+            {COMPANIES.map((co, i) => (
+              <motion.span 
+                key={co} 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="font-serif text-xl md:text-2xl text-brand-charcoal font-medium italic"
+              >
+                {co}
+              </motion.span>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Capabilities Section */}
@@ -419,7 +416,12 @@ export default function App() {
         <div className="absolute inset-0 bg-grid-pattern -z-10" />
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-16 items-end mb-24">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
               <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal mb-6">
                 Strategic Impact, <br />
                 <span className="text-brand-gold italic">Efficiently Delivered.</span>
@@ -427,12 +429,18 @@ export default function App() {
               <p className="text-lg text-brand-charcoal/70 leading-relaxed">
                 We specialize in creating lightweight, low-resource-impact proprietary methodologies that streamline risk identification and reporting.
               </p>
-            </div>
-            <div className="flex flex-col gap-4 border-l-2 border-brand-gold/20 pl-8">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex flex-col gap-4 border-l-2 border-brand-gold/20 pl-8"
+            >
               <p className="text-brand-charcoal/60 italic font-serif text-lg">
                 "By combining disciplined process efficiency with AI-driven tools, we deliver clear, actionable insights while minimizing organizational overhead."
               </p>
-            </div>
+            </motion.div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -463,19 +471,32 @@ export default function App() {
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-brand-gold/10 to-transparent pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-3xl mx-auto mb-24"
+          >
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Our Methodology</h2>
             <p className="text-brand-cream/60 text-lg">
               A process-management mindset designed to perform under pressure and deliver sustainable results.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-12 relative">
             {/* Connector Line */}
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-brand-cream/10 -translate-y-1/2 z-0" />
             
             {METHODOLOGY.map((item, i) => (
-              <div key={item.title} className="relative z-10 group">
+              <motion.div 
+                key={item.title} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.2 }}
+                className="relative z-10 group"
+              >
                 <div className="mb-8 flex items-center justify-center md:justify-start">
                   <div className="w-16 h-16 rounded-full bg-brand-gold flex items-center justify-center text-brand-charcoal font-serif text-2xl font-bold border-4 border-brand-charcoal group-hover:scale-110 transition-transform">
                     {item.step}
@@ -485,11 +506,17 @@ export default function App() {
                 <p className="text-brand-cream/60 leading-relaxed text-center md:text-left">
                   {item.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-32 p-12 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="mt-32 p-12 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm"
+          >
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="text-3xl font-serif mb-6">Why Crosswinds?</h3>
@@ -499,11 +526,18 @@ export default function App() {
                     'AI-driven tools for efficiency and scale',
                     'Disciplined process management mindset',
                     'Extensive network of senior risk professionals'
-                  ].map(text => (
-                    <li key={text} className="flex items-start gap-3">
+                  ].map((text, i) => (
+                    <motion.li 
+                      key={text} 
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
                       <CheckCircle2 className="text-brand-gold mt-1 shrink-0" size={20} />
                       <span className="text-brand-cream/80">{text}</span>
-                    </li>
+                    </motion.li>
                   ))}
                 </ul>
               </div>
@@ -513,19 +547,31 @@ export default function App() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Comparison Section */}
       <section className="py-24 md:py-40 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-20"
+          >
             <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal mb-6">The Crosswinds Edge</h2>
             <p className="text-brand-charcoal/60 max-w-2xl mx-auto">Why we outperform traditional big-box advisory firms.</p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-px bg-brand-charcoal/5 rounded-3xl overflow-hidden border border-brand-charcoal/5">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="grid md:grid-cols-2 gap-px bg-brand-charcoal/5 rounded-3xl overflow-hidden border border-brand-charcoal/5"
+          >
             <div className="bg-white p-12">
               <h3 className="text-xs font-bold tracking-widest uppercase text-brand-charcoal/60 mb-10">Traditional Advisory</h3>
               <ul className="space-y-6">
@@ -534,11 +580,18 @@ export default function App() {
                   'Junior staff executing generic playbooks',
                   'Manual, labor-intensive reporting cycles',
                   'High implementation drag and organizational fatigue'
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-3 text-brand-charcoal/60 line-through decoration-brand-charcoal/30">
+                ].map((item, i) => (
+                  <motion.li 
+                    key={item} 
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="flex items-start gap-3 text-brand-charcoal/60 line-through decoration-brand-charcoal/30"
+                  >
                     <X size={18} className="mt-1 shrink-0" />
                     <span>{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </div>
@@ -553,15 +606,22 @@ export default function App() {
                   'Dedicated principal expertise on every engagement',
                   'AI-driven tools for real-time risk intelligence',
                   'Low-resource-impact solutions that enable action'
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-3 text-brand-cream">
+                ].map((item, i) => (
+                  <motion.li 
+                    key={item} 
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                    className="flex items-start gap-3 text-brand-cream"
+                  >
                     <CheckCircle2 size={18} className="mt-1 shrink-0 text-brand-gold" />
                     <span>{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -569,7 +629,12 @@ export default function App() {
       <section className="py-24 md:py-40 bg-brand-cream relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
               <span className="text-brand-gold font-bold tracking-widest uppercase text-xs mb-4 block">Interactive Diagnostic</span>
               <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal mb-8">Measure Your Risk Maturity</h2>
               <p className="text-lg text-brand-charcoal/70 leading-relaxed mb-8">
@@ -585,8 +650,15 @@ export default function App() {
                   <span className="text-xs font-bold uppercase tracking-widest">Private & Secure</span>
                 </div>
               </div>
-            </div>
-            <RiskMaturityAssessment />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <RiskMaturityAssessment />
+            </motion.div>
           </div>
         </div>
       </section>
@@ -594,7 +666,13 @@ export default function App() {
       {/* Insights Section */}
       <section className="py-24 md:py-40 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8"
+          >
             <div className="max-w-2xl">
               <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal mb-6">Executive Insights</h2>
               <p className="text-lg text-brand-charcoal/70">Thought leadership on the intersection of risk, resilience, and AI.</p>
@@ -602,16 +680,16 @@ export default function App() {
             <a href="#" className="text-brand-gold font-bold flex items-center gap-2 hover:gap-3 transition-all">
               View All Articles <ArrowRight size={18} />
             </a>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {INSIGHTS.map((insight, i) => (
               <motion.div 
                 key={insight.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="group cursor-pointer"
               >
                 <div className="aspect-video bg-brand-charcoal/5 rounded-2xl mb-6 overflow-hidden relative">
@@ -635,7 +713,13 @@ export default function App() {
       <section id="principal" className="py-24 md:py-40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
-            <div className="lg:col-span-5">
+            <motion.div 
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-5"
+            >
               <div className="relative">
                 <div className="aspect-[4/5] bg-brand-charcoal/5 rounded-3xl overflow-hidden border border-brand-charcoal/10">
                   <img 
@@ -652,8 +736,14 @@ export default function App() {
                   </p>
                 </div>
               </div>
-            </div>
-            <div className="lg:col-span-7">
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="lg:col-span-7"
+            >
               <span className="text-brand-gold font-bold tracking-widest uppercase text-xs mb-4 block">The Founder</span>
               <h2 className="text-5xl font-serif text-brand-charcoal mb-8">Bill Savage</h2>
               <div className="space-y-6 text-lg text-brand-charcoal/70 leading-relaxed">
@@ -668,13 +758,20 @@ export default function App() {
                 </p>
               </div>
               <div className="mt-10 flex flex-wrap gap-3">
-                {['Banking', 'Insurance', 'Aerospace', 'Telecom', 'Manufacturing'].map(tag => (
-                  <span key={tag} className="px-4 py-2 bg-brand-charcoal/5 rounded-full text-sm font-medium text-brand-charcoal/60">
+                {['Banking', 'Insurance', 'Aerospace', 'Telecom', 'Manufacturing'].map((tag, i) => (
+                  <motion.span 
+                    key={tag} 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 + (i * 0.1) }}
+                    className="px-4 py-2 bg-brand-charcoal/5 rounded-full text-sm font-medium text-brand-charcoal/60"
+                  >
                     {tag}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -682,7 +779,13 @@ export default function App() {
       {/* Contact Section */}
       <section id="contact" className="py-24 md:py-40 bg-brand-cream relative">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-brand-charcoal/5">
+          <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className="bg-white rounded-[40px] shadow-2xl overflow-hidden border border-brand-charcoal/5"
+          >
             <div className="grid lg:grid-cols-2">
               <div className="p-12 md:p-20 bg-brand-charcoal text-brand-cream">
                 <h2 className="text-4xl md:text-5xl font-serif mb-8">Ready to strengthen your risk posture?</h2>
@@ -744,13 +847,19 @@ export default function App() {
                 </form>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
       <footer className="py-12 border-t border-brand-charcoal/5">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8"
+        >
           <div className="flex items-center gap-2">
             <div className="w-6 h-6 bg-brand-charcoal flex items-center justify-center rounded-sm">
               <span className="text-brand-cream font-serif font-bold text-xs">C</span>
@@ -768,7 +877,7 @@ export default function App() {
             <a href="#" className="text-brand-charcoal/40 hover:text-brand-gold transition-colors"><Linkedin size={20} /></a>
             <a href="#" className="text-brand-charcoal/40 hover:text-brand-gold transition-colors"><Mail size={20} /></a>
           </div>
-        </div>
+        </motion.div>
       </footer>
     </motion.div>
   );
